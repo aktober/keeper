@@ -56,7 +56,7 @@ ROOT_URLCONF = 'keeper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'keeper/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
