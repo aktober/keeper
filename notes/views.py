@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, View, UpdateView
@@ -15,13 +15,17 @@ def home(request):
 class NotesListView(ListView):
     model = Note
 
+    def get_queryset(self):
+        return Note.objects.filter(user=self.request.user)
+
 
 class NoteDetailView(DetailView):
     model = Note
 
     def get_context_data(self, **kwargs):
         context = super(NoteDetailView, self).get_context_data(**kwargs)
-        # context['now'] = timezone.now()
+        if self.get_object().user != self.request.user:
+            raise Http404
         return context
 
 
@@ -35,7 +39,9 @@ class NewNoteView(View):
     def post(self, request):
         f = NewNote(request.POST)
         if f.is_valid():
-            f.save()
+            new_note = f.save(commit=False)
+            new_note.user = request.user
+            new_note.save()
             return HttpResponseRedirect(reverse('notes:notes-list'))
 
 
@@ -44,3 +50,9 @@ class EditNoteView(UpdateView):
     fields = ['title', 'text']
     template_name_suffix = '_update'
     success_url = '/notes/'
+
+    def get_context_data(self, **kwargs):
+        context = super(EditNoteView, self).get_context_data(**kwargs)
+        if self.get_object().user != self.request.user:
+            raise Http404
+        return context

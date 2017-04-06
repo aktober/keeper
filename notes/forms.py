@@ -6,4 +6,4 @@ class NewNote(forms.ModelForm):
     class Meta:
         model = Note
         fields = ['title', 'text']
-        labels = {'title': '', 'text': ''}
+        labels = {'title': 'Title', 'text': 'Text'}
