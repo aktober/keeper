@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes Keeper</title>
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href="{% static 'notes/css/cover.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li><a href="{% url 'users:login' %}">Login</a></li>
+                            <li><a href="{% url 'users:register' %}">Register</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Notes keeper</h1>
+                <p class="lead">Keep all your ideas and knowledge.
+                    Make notes, don't forget anything. </p>
+            </div>
+
+            <div class="mastfoot">
+            <div class="inner">
+              <p>Powered by <a href="https://www.djangoproject.com/">Django</a></p>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

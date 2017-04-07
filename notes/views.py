@@ -9,7 +9,7 @@ from notes.forms import NewNote
 
 
 def home(request):
-    return render(request, 'notes/base.html')
+    return render(request, 'notes/home.html')
 
 
 class NotesListView(ListView):
