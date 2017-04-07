@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes Keeper</title>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+        <div class="brand-logo">Notes Keeper</div>
+    </div>
+</nav>
+
+<div class="row">
+
+    <div class="col s3">
+        <!-- Grey navigation panel -->
+        <div class="card cyan darken-4">
+            <div class="card-action">
+                <a href="{% url 'notes:notes-list' %}">All notes</a>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'notes:add_note' %}">Add note</a>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'users:logout' %}">Logout</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col s9">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+</body>
+</html>

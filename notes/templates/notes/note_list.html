@@ -1,35 +1,7 @@
-{% extends 'notes/base_materialize.html' %}
+{% extends 'notes/base_navigation.html' %}
 
 {% block content %}
 
-    <nav>
-        <div class="nav-wrapper">
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{% url 'users:logout' %}">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
-
-
-    <div class="row">
-
-        <div class="col s3">
-            <!-- Grey navigation panel -->
-            <div class="card cyan darken-4">
-                <div class="card-action">
-                    <a href="{% url 'notes:add_note' %}">Add note</a>
-                </div>
-                <div class="card-action">
-                    <a href="#">Tags</a>
-                </div>
-            </div>
-            <div class="card-panel teal lighten-2">This is a card panel with a teal lighten-2 class</div>
-
-
-        </div>
-
-        <div class="col s9">
-            <!-- Teal page content  -->
             {% for note in object_list %}
                 <div class="row">
                     <div class="col s12">
@@ -47,9 +19,5 @@
             {% empty %}
                 <p>No articles yet.</p>
             {% endfor %}
-        </div>
-
-    </div>
-
 
 {% endblock %}

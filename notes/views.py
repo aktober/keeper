@@ -16,7 +16,7 @@ class NotesListView(ListView):
     model = Note
 
     def get_queryset(self):
-        return Note.objects.filter(user=self.request.user)
+        return Note.objects.filter(user=self.request.user).order_by('-date')
 
 
 class NoteDetailView(DetailView):
@@ -49,10 +49,11 @@ class EditNoteView(UpdateView):
     model = Note
     fields = ['title', 'text']
     template_name_suffix = '_update'
-    success_url = '/notes/'
+    success_url = '/notes/all/'
 
     def get_context_data(self, **kwargs):
         context = super(EditNoteView, self).get_context_data(**kwargs)
         if self.get_object().user != self.request.user:
             raise Http404
         return context
+
