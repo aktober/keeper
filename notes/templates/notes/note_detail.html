@@ -2,9 +2,10 @@
 
 {% block content %}
 
-    <h1>{{ object.title }}</h1>
+    <h4>{{ object.title }}</h4>
     <p>{{ object.text }}</p>
     <p>Published: {{ object.date }}</p>
+    <p>Tags: {{ object.tags }}</p>
 
     <a href="{% url 'notes:edit_note' pk=object.id %}"
        class="waves-effect waves-light btn">Edit</a>

@@ -1,0 +1,19 @@
+{% extends 'notes/base_navigation.html' %}
+
+{% block content %}
+
+            <h4>Tags</h4>
+            {% for tag in object_list %}
+                <div class="row">
+{#                    <div class="col s12">#}
+                        <div class="chip">
+                            {{ tag.tag }}
+                            <i class="close material-icons">close</i>
+                        </div>
+{#                    </div>#}
+                </div>
+            {% empty %}
+                <p>No tags yet.</p>
+            {% endfor %}
+
+{% endblock %}

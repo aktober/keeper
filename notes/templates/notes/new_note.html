@@ -1,11 +1,15 @@
 {% extends 'notes/base_navigation.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
+    <h4>New note</h4>
     <form action="{% url 'notes:add_note' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="waves-effect waves-light btn">Add note</button>
+        {{ form.title|add_class:"validate"|attr:"placeholder:Title" }}
+        {{ form.text|add_class:"materialize-textarea"|attr:"placeholder:Text" }}
+{#        {{ form.tags|add_class:"validate"|attr:"placeholder:Tag" }}#}
+        <button type="submit" class="waves-effect waves-light btn">Save</button>
     </form>
 
 {% endblock %}
