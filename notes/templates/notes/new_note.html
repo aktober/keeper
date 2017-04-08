@@ -8,8 +8,26 @@
         {% csrf_token %}
         {{ form.title|add_class:"validate"|attr:"placeholder:Title" }}
         {{ form.text|add_class:"materialize-textarea"|attr:"placeholder:Text" }}
-{#        {{ form.tags|add_class:"validate"|attr:"placeholder:Tag" }}#}
+
+        <div class="input-field">
+            <select name="tag_select">
+                {% for tag in all_tags %}
+                    <option value="{{ tag.id }}">{{ tag.tag }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+{#        <p>Link tags:</p>#}
+{#        {% for t in all_tags %}#}
+{#            <div class="chip">#}
+{#                <a href="#">{{ t.tag }}</a>#}
+{#            </div>#}
+{#        {% endfor %}#}
+
+        <br><br>
         <button type="submit" class="waves-effect waves-light btn">Save</button>
     </form>
+
+
 
 {% endblock %}

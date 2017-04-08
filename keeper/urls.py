@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from keeper import settings
 from notes import views
 
 
@@ -25,3 +26,9 @@ urlpatterns = [
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^$', views.home, name='home'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

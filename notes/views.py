@@ -32,7 +32,8 @@ class NewNoteView(View):
 
     def get(self, request):
         f = NewNote()
-        context = {'form': f}
+        all_tags = Tag.objects.all()
+        context = {'form': f, 'all_tags': all_tags}
         return render(request, 'notes/new_note.html', context)
 
     def post(self, request):
@@ -40,7 +41,13 @@ class NewNoteView(View):
         if f.is_valid():
             new_note = f.save(commit=False)
             new_note.user = request.user
+
+            choice = request.POST.get('tag_select')
+            tag = Tag.objects.get(id=choice)
+            new_note.tags = tag
+
             new_note.save()
+            f.save_m2m()
             return HttpResponseRedirect(reverse('notes:notes-list'))
 
 
