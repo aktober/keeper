@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, View, UpdateView
+from django.views.generic import ListView, DetailView, View, UpdateView, DeleteView
 
 from notes.models import Note, Tag
 from notes.forms import NewNote
@@ -42,12 +42,16 @@ class NewNoteView(View):
             new_note = f.save(commit=False)
             new_note.user = request.user
 
-            choice = request.POST.get('tag_select')
-            tag = Tag.objects.get(id=choice)
-            new_note.tags = tag
-
+            tags = []
+            choice = request.POST.getlist('tag_select')
+            for c in choice:
+                tag = Tag.objects.get(id=c)
+                tags.append(tag)
             new_note.save()
-            f.save_m2m()
+
+            for t in tags:
+                new_note.all_tags.add(t)
+
             return HttpResponseRedirect(reverse('notes:notes-list'))
 
 
@@ -66,3 +70,7 @@ class EditNoteView(UpdateView):
 
 class TagsListView(ListView):
     model = Tag
+
+
+# class NoteDeleteView(DeleteView):
+#     model = Note

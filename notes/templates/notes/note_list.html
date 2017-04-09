@@ -12,12 +12,13 @@
                             </div>
                             <div class="card-action">
                                 <a href="{% url 'notes:note-detail' pk=note.id %}">More</a>
+                                <a href="{% url 'notes:note-detail' pk=note.id %}">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
             {% empty %}
-                <p>No articles yet.</p>
+                <p>No notes yet.</p>
             {% endfor %}
 
 {% endblock %}

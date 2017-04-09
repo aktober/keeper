@@ -15,7 +15,7 @@ class Note(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=50, blank=False, null=False)
     text = models.TextField(blank=False, null=False)
-    tags = models.ForeignKey(Tag, blank=True, null=True)
+    all_tags = models.ManyToManyField(Tag, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

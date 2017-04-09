@@ -10,9 +10,11 @@
         {{ form.text|add_class:"materialize-textarea"|attr:"placeholder:Text" }}
 
         <div class="input-field">
-            <select name="tag_select">
+            <select name="tag_select" multiple>
                 {% for tag in all_tags %}
-                    <option value="{{ tag.id }}">{{ tag.tag }}</option>
+                    <option value="{{ tag.id }}">
+                        {{ tag.tag }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
