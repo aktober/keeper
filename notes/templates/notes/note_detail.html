@@ -4,8 +4,7 @@
 
     <h4>{{ object.title }}</h4>
     <p>{{ object.text }}</p>
-    <p>Published: {{ object.date }}</p>
-    <p>Tags:
+    <p>
         {% for tag in object.all_tags.all %}
             <div class="chip">
                 {{ tag }}

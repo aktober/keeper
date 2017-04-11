@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'widget_tweaks',
     'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

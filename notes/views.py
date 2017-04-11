@@ -1,7 +1,9 @@
-from django.http import HttpResponseRedirect, Http404
+import json
+
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
-from django.urls import reverse
-from django.views.generic import ListView, DetailView, View, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.views import generic
 
 from notes.models import Note, Tag
 from notes.forms import NewNote
@@ -11,14 +13,25 @@ def home(request):
     return render(request, 'notes/home.html')
 
 
-class NotesListView(ListView):
+class NotesListView(generic.ListView):
     model = Note
 
     def get_queryset(self):
         return Note.objects.filter(user=self.request.user).order_by('-date')
 
 
-class NoteDetailView(DetailView):
+class NotesListView2(generic.View):
+    # model = Note
+    #
+    # def get_queryset(self):
+    #     return Note.objects.filter(user=self.request.user).order_by('-date')
+    def get(self, request):
+        notes = Note.objects.all()
+        context = {'notes': notes}
+        return render(request, 'notes/note_list2.html', context)
+
+
+class NoteDetailView(generic.DetailView):
     model = Note
 
     def get_context_data(self, **kwargs):
@@ -28,7 +41,7 @@ class NoteDetailView(DetailView):
         return context
 
 
-class NewNoteView(View):
+class NewNoteView(generic.View):
 
     def get(self, request):
         f = NewNote()
@@ -55,7 +68,7 @@ class NewNoteView(View):
             return HttpResponseRedirect(reverse('notes:notes-list'))
 
 
-class EditNoteView(UpdateView):
+class EditNoteView(generic.UpdateView):
     model = Note
     fields = ['title', 'text']
     template_name_suffix = '_update'
@@ -68,9 +81,14 @@ class EditNoteView(UpdateView):
         return context
 
 
-class TagsListView(ListView):
+class TagsListView(generic.ListView):
     model = Tag
 
-
-# class NoteDeleteView(DeleteView):
-#     model = Note
+#TODO remove
+def remove_note(request, pk):
+    # id = int(request.POST.get('pk'))
+    note = Note.objects.get(id=pk)
+    note.delete()
+    # remove_load = {'success': True}
+    # return HttpResponse(json.dumps(remove_load), content_type='application/json')
+    return HttpResponse('ok')
