@@ -31,5 +31,20 @@ $(document).ready(function () {
                 $('#tag-text').val("");
             }
         });
+    });
+
+    $('i.close').click(function (e) {
+        e.preventDefault();
+        // var tag = $(this).closest('div.chip')[0].childNodes[0].nodeValue;
+        var url = $(this).attr('content');
+
+        $.ajax({
+            type: 'delete',
+            url: url,
+            success: function(){
+                console.log('delete success');
+                $(this).closest('div.chip').fadeOut();
+            }
+        });
     })
 });

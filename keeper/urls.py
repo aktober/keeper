@@ -19,7 +19,7 @@ from django.contrib import admin
 from keeper import settings
 from notes import views
 from notes.api.views import TagCreateAPIView, TagListAPIView, NoteListAPIView,\
-NoteDestroyAPIView
+NoteDestroyAPIView, TagDestroyAPIView
 
 
 urlpatterns = [
@@ -29,7 +29,9 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
 
     url(r'^api/tags/add$', TagCreateAPIView.as_view(), name='api-tags-add'),
+    url(r'^api/tags/destroy/(?P<pk>[-\w]+)/$', TagDestroyAPIView.as_view(), name='api-tags-destroy'),
     url(r'^api/tags/list$', TagListAPIView.as_view(), name='api-tags-list'),
+
     url(r'^api/notes/list$', NoteListAPIView.as_view(), name='api-notes-list'),
     url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$', NoteDestroyAPIView.as_view(), name='api-notes-destroy'),
 ]

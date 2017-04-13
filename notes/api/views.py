@@ -36,3 +36,15 @@ class NoteDestroyAPIView(generics.DestroyAPIView):
         qs = Note.objects.get(id=pk)
         qs.delete()
         return Response(data={'result': "OK"}, status=200)
+
+
+class TagDestroyAPIView(generics.DestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = []
+    authentication_classes = []
+
+    def delete(self, request, pk):
+        qs = Tag.objects.get(id=pk)
+        qs.delete()
+        return Response(data={'result': "OK"}, status=200)
