@@ -20,17 +20,6 @@ class NotesListView(generic.ListView):
         return Note.objects.filter(user=self.request.user).order_by('-date')
 
 
-class NotesListView2(generic.View):
-    # model = Note
-    #
-    # def get_queryset(self):
-    #     return Note.objects.filter(user=self.request.user).order_by('-date')
-    def get(self, request):
-        notes = Note.objects.all()
-        context = {'notes': notes}
-        return render(request, 'notes/note_list2.html', context)
-
-
 class NoteDetailView(generic.DetailView):
     model = Note
 

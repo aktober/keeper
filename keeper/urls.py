@@ -32,7 +32,6 @@ urlpatterns = [
     url(r'^api/tags/list$', TagListAPIView.as_view(), name='api-tags-list'),
     url(r'^api/notes/list$', NoteListAPIView.as_view(), name='api-notes-list'),
     url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$', NoteDestroyAPIView.as_view(), name='api-notes-destroy'),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 if settings.DEBUG:
