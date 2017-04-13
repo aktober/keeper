@@ -1,0 +1,20 @@
+{% extends 'notes/base_navigation.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    <h4>Tags</h4>
+    <div class="tags-list">
+        {% for tag in tags %}
+            <p>{{ tag.tag }}</p>
+        {% endfor %}
+    </div>
+
+    <form action="{% url 'api-tags-add' %}" method="post" id="tag-form">
+        {% csrf_token %}
+        {{ form.tag|add_class:"validate"|attr:"placeholder:Tag"|attr:"id:tag-text" }}
+        <br>
+        <button type="submit" class="waves-effect waves-light btn">Save</button>
+    </form>
+
+{% endblock %}

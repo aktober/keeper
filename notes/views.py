@@ -1,12 +1,10 @@
-import json
-
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views import generic
 
 from notes.models import Note, Tag
-from notes.forms import NewNote
+from notes.forms import NewNote, NewTagForm
 
 
 def home(request):
@@ -70,14 +68,10 @@ class EditNoteView(generic.UpdateView):
         return context
 
 
-class TagsListView(generic.ListView):
-    model = Tag
+class TagsListView(generic.View):
 
-#TODO remove
-def remove_note(request, pk):
-    # id = int(request.POST.get('pk'))
-    note = Note.objects.get(id=pk)
-    note.delete()
-    # remove_load = {'success': True}
-    # return HttpResponse(json.dumps(remove_load), content_type='application/json')
-    return HttpResponse('ok')
+    def get(self, request):
+        tags = Tag.objects.all()
+        form = NewTagForm()
+        context = {'tags': tags, 'form': form }
+        return render(request, 'notes/tags.html', context)
