@@ -26,7 +26,9 @@ $(document).ready(function () {
             data: { tag: value },
             success: function() {
                 console.log('success');
-                $('div.tags-list').append("<p>" + value + "</p>");
+                $('div.tags-list').append("<div class='chip'>" +
+                value + "<i class='close material-icons'>close</i></div>");
+                $('#tag-text').val("");
             }
         });
     })
