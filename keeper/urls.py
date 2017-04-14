@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 
 from keeper import settings
 from notes import views
@@ -28,12 +29,16 @@ urlpatterns = [
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^$', views.home, name='home'),
 
-    url(r'^api/tags/add$', TagCreateAPIView.as_view(), name='api-tags-add'),
-    url(r'^api/tags/destroy/(?P<pk>[-\w]+)/$', TagDestroyAPIView.as_view(), name='api-tags-destroy'),
-    url(r'^api/tags/list$', TagListAPIView.as_view(), name='api-tags-list'),
-
-    url(r'^api/notes/list$', NoteListAPIView.as_view(), name='api-notes-list'),
-    url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$', NoteDestroyAPIView.as_view(), name='api-notes-destroy'),
+    url(r'^api/tags/add$', login_required(TagCreateAPIView.as_view()),
+        name='api-tags-add'),
+    url(r'^api/tags/destroy/(?P<pk>[-\w]+)/$',
+        login_required(TagDestroyAPIView.as_view()), name='api-tags-destroy'),
+    url(r'^api/tags/list$', login_required(TagListAPIView.as_view()),
+        name='api-tags-list'),
+    url(r'^api/notes/list$', login_required(NoteListAPIView.as_view()),
+        name='api-notes-list'),
+    url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$',
+        login_required(NoteDestroyAPIView.as_view()), name='api-notes-destroy'),
 ]
 
 if settings.DEBUG:
