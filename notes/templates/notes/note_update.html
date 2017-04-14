@@ -1,10 +1,14 @@
 {% extends 'notes/base_navigation.html' %}
+{% load widget_tweaks %}
+{% load static %}
 
 {% block content %}
 
     <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
+        {{ form.title|add_class:"validate"|attr:"placeholder:Title" }}
+        {{ form.text|add_class:"materialize-textarea" }}
         <input type="submit" class="waves-effect waves-light btn" value="Update"/>
+        <a href="{% url 'notes:note-detail' pk=object.id %}" class="waves-effect waves-light btn">Cancel</a>
     </form>
 
 {% endblock %}
