@@ -22,6 +22,7 @@ def register_view(request):
             authenticated_user = authenticate(username=new_user.username,
                                               password=request.POST['password1'])
             login(request, authenticated_user)
-            return HttpResponseRedirect(reverse('notes-list'))
+            return HttpResponseRedirect(reverse('notes:notes-list'))
+
     context = {'form': form}
     return render(request, 'users/register.html', context)
