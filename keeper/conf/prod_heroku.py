@@ -1,6 +1,9 @@
 from .base import *
 import dj_database_url
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 SECRET_KEY = os.environ['SECRET_KEY']
 
 ROOT_DIR = BASE_DIR
