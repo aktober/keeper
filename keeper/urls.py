@@ -39,6 +39,8 @@ urlpatterns = [
         name='api-notes-list'),
     url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$',
         login_required(NoteDestroyAPIView.as_view()), name='api-notes-destroy'),
+
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

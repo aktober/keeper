@@ -28,8 +28,14 @@
                 <div class="inner">
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li><a href="{% url 'users:login' %}">Login</a></li>
-                            <li><a href="{% url 'users:register' %}">Register</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'notes:notes-list' %}">{{ request.user.username }}</a>
+                                </li>
+                                <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                            {% else %}
+                                <li><a href="/accounts/login/">Login</a></li>
+                                <li><a href="/accounts/signup/">Register</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>

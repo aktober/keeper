@@ -10,3 +10,6 @@ psycopg2==2.7.1
 static3==0.7.0
 whitenoise==3.3.0
 dj-static==0.0.6
+
+selenium==3.4.3
+django-allauth==0.32.0

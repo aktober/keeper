@@ -25,4 +25,4 @@ def register_view(request):
             return HttpResponseRedirect(reverse('notes:notes-list'))
 
     context = {'form': form}
-    return render(request, 'users/register.html', context)
+    return render(request, 'users/register2.html', context)

@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -34,6 +35,12 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'debug_toolbar',
     'rest_framework',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +95,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -111,3 +124,19 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/users/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+    }
+}
+
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.RegisterForm'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
