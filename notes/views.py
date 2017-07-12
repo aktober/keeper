@@ -47,7 +47,7 @@ class NewNoteView(generic.View):
 
 class EditNoteView(generic.UpdateView):
     model = Note
-    fields = ['title', 'text']
+    fields = ['title', 'text', 'tags']
     template_name_suffix = '_update'
     success_url = '/notes/all/'
 

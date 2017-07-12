@@ -1,18 +1,20 @@
-{% extends 'notes/base_navigation.html' %}
+{% extends 'notes/bootstrap_base.html' %}
 
+{% load note_extras %}
 {% block content %}
 
     <h4>{{ object.title }}</h4>
     <p>{{ object.text }}</p>
-    <p>
-        {% for tag in object.all_tags.all %}
-            <div class="chip">
-                {{ tag }}
+    {% if object.tags %}
+
+        {% for tag in note.tags|split_by_tags %}
+            <div class="badge badge-success">{{ tag }}
             </div>
         {% endfor %}
-        </p>
+        <br><br>
+    {% endif %}
 
     <a href="{% url 'notes:edit_note' pk=object.id %}"
-       class="waves-effect waves-light btn">Edit</a>
+       class="btn btn-primary">Edit</a>
 
 {% endblock %}

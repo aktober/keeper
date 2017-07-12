@@ -1,14 +1,18 @@
-{% extends 'notes/base_navigation.html' %}
+{% extends 'notes/bootstrap_base.html' %}
 {% load widget_tweaks %}
 {% load static %}
 
 {% block content %}
 
     <form action="" method="post">{% csrf_token %}
-        {{ form.title|add_class:"validate"|attr:"placeholder:Title" }}
-        {{ form.text|add_class:"materialize-textarea" }}
-        <input type="submit" class="waves-effect waves-light btn" value="Update"/>
-        <a href="{% url 'notes:note-detail' pk=object.id %}" class="waves-effect waves-light btn">Cancel</a>
+        {{ form.title|add_class:"form-control"|attr:"placeholder:Title" }}
+        <br>
+        {{ form.text|add_class:"form-control" }}
+        <br>
+        {{ form.tags|add_class:"form-control" }}
+        <br>
+        <input type="submit" class="btn btn-primary" value="Update"/>
+        <a href="{% url 'notes:note-detail' pk=object.id %}" class="btn btn-warning">Cancel</a>
     </form>
 
 {% endblock %}
