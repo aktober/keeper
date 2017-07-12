@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = '/accounts/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
 
@@ -135,7 +135,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/notes/all/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.RegisterForm'

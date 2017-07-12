@@ -9,4 +9,5 @@ class Profile(models.Model):
     bio = models.CharField(max_length=100, default='', blank=True)
 
     def __str__(self):
-        return str(self.user.username)
+        return self.user.username + ': ' + self.user.first_name + \
+            ' ' + self.user.last_name

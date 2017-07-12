@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from notes.models import Note, Tag
+from notes.models import Note
 
 admin.site.register(Note)
-admin.site.register(Tag)

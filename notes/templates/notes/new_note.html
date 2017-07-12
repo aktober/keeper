@@ -1,35 +1,17 @@
-{% extends 'notes/base_navigation.html' %}
+{% extends 'notes/bootstrap_base.html' %}
 {% load widget_tweaks %}
 
 {% block content %}
 
-    <h4>New note</h4>
     <form action="{% url 'notes:add_note' %}" method="post">
         {% csrf_token %}
-        {{ form.title|add_class:"validate"|attr:"placeholder:Title" }}
-        {{ form.text|add_class:"materialize-textarea"|attr:"placeholder:Text" }}
-
-        <div class="input-field">
-            <select name="tag_select" multiple>
-                {% for tag in all_tags %}
-                    <option value="{{ tag.id }}">
-                        {{ tag.tag }}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
-
-{#        <p>Link tags:</p>#}
-{#        {% for t in all_tags %}#}
-{#            <div class="chip">#}
-{#                <a href="#">{{ t.tag }}</a>#}
-{#            </div>#}
-{#        {% endfor %}#}
-
-        <br><br>
-        <button type="submit" class="waves-effect waves-light btn">Save</button>
+        {{ form.title|add_class:"form-control"|attr:"placeholder:Title" }}
+        <br>
+        {{ form.text|add_class:"form-control"|attr:"placeholder:Text" }}
+        <br>
+        {{ form.tags|add_class:"form-control"|attr:"placeholder:Tags (separeted by comma)" }}
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
-
-
 
 {% endblock %}

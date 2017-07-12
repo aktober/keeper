@@ -19,8 +19,7 @@ from django.contrib.auth.decorators import login_required
 
 from keeper import settings
 from notes import views
-from notes.api.views import TagCreateAPIView, TagListAPIView, NoteListAPIView,\
-NoteDestroyAPIView, TagDestroyAPIView
+from notes.api.views import NoteListAPIView, NoteDestroyAPIView
 
 
 urlpatterns = [
@@ -29,12 +28,6 @@ urlpatterns = [
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^$', views.home, name='home'),
 
-    url(r'^api/tags/add$', login_required(TagCreateAPIView.as_view()),
-        name='api-tags-add'),
-    url(r'^api/tags/destroy/(?P<pk>[-\w]+)/$',
-        login_required(TagDestroyAPIView.as_view()), name='api-tags-destroy'),
-    url(r'^api/tags/list$', login_required(TagListAPIView.as_view()),
-        name='api-tags-list'),
     url(r'^api/notes/list$', login_required(NoteListAPIView.as_view()),
         name='api-notes-list'),
     url(r'^api/notes/destroy/(?P<pk>[-\w]+)/$',

@@ -1,0 +1,46 @@
+{% extends 'notes/bootstrap_base.html' %}
+
+{% load note_extras %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+
+    {% for note in obj %}
+        {% if forloop.first %}
+            <div class="row">
+        {% endif %}
+        <div class="col-sm-6">
+        <br>
+        <div class="card" style="background-color: #ededed; border-color: #ededed;">
+            <div class="card-block">
+                <h4 class="card-title">{{ note.title }}</h4>
+                <p class="card-text">{{ note.text }}</p>
+
+
+                {% if note.tags %}
+
+                    {% for tag in note.tags|split_by_tags %}
+                        <div class="badge badge-success">{{ tag }}
+                        </div>
+                    {% endfor %}
+                    <br><br>
+                {% endif %}
+
+                <a href="{% url 'notes:note-detail' pk=note.id %}" class="btn btn-info">More</a>
+                <a href="{% url 'api-notes-destroy' pk=note.id %}" id="note-del"
+                   class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:2 %}</div>
+            <div class="row">
+        {% endif %}
+
+        {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+
+{% endblock %}
