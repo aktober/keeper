@@ -7,8 +7,4 @@ register = template.Library()
 @register.filter
 @stringfilter
 def split_by_tags(value):
-    # print(value)
-    arr = value.split(',')
-    for a in arr:
-        print(a)
-    return arr
+    return value.split(',')

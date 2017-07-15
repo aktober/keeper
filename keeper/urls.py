@@ -34,6 +34,8 @@ urlpatterns = [
         login_required(NoteDestroyAPIView.as_view()), name='api-notes-destroy'),
 
     url(r'^accounts/', include('allauth.urls')),
+
+    url(r'^ajax/notes/', views.ajax_notes),
 ]
 
 if settings.DEBUG:

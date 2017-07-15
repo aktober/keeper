@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import generic
 
@@ -9,6 +10,13 @@ from notes.forms import NewNote
 
 def home(request):
     return render(request, 'notes/home.html')
+
+
+#todo login required
+def ajax_notes(request):
+    obj = Note.objects.filter(user=request.user).order_by('-date')
+    context = {'obj': obj}
+    return render_to_string('notes/ajax_notes.html', context)
 
 
 class ProfileView(generic.View):
