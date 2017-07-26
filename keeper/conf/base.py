@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'bootstrapform',
 ]
 
@@ -132,7 +134,21 @@ SOCIALACCOUNT_PROVIDERS = {
             'repo',
             'read:org',
         ],
-    }
+    },
+
+    'facebook': {
+        'LOCALE_FUNC': lambda request: 'en_US'
+    },
+
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
 }
 
 LOGIN_REDIRECT_URL = '/notes/all/'

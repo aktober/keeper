@@ -4,9 +4,15 @@ from users.models import Profile
 
 
 class RegisterForm(forms.ModelForm):
+    # first_name = forms.CharField(widget=forms.TextInput(attrs={'placeHolder':'First Name'}))
     class Meta:
         model = Profile
         fields = ('first_name', 'last_name', 'bio',)
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeHolder':'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeHolder': 'Last Name'}),
+            'bio': forms.TextInput(attrs={'placeHolder': 'Bio'}),
+        }
 
     def signup(self, request, user):
         # Save your user

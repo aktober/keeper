@@ -1,1 +1,1 @@
-from .conf.prod_heroku import *
+from .conf.local import *

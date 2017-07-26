@@ -8,6 +8,27 @@
 {% block head_title %} Login {% endblock %}
 
 {% block scripts %}
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '799731823519921',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -17,21 +38,12 @@
         {% get_providers as socialaccount_providers %}
 
         <h2 class="form-signin-heading" align="center">Please login</h2>
+
         {% if socialaccount_providers %}
             <div class="socialaccount_ballot">
 
                 <form class="form-signin" method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
-{#                    <label for="id_login" class="sr-only">Username</label>#}
-{#                    <input type="text" id="id_login" class="form-control" placeholder="Username" required#}
-{#                           autofocus>#}
-{#                    <label for="id_password" class="sr-only">Password</label>#}
-{#                    <input type="password" id="id_password" class="form-control" placeholder="Password" required>#}
-{#                    <div class="checkbox">#}
-{#                        <label>#}
-{#                            <input id="id_remember" type="checkbox" value="remember-me"> Remember me#}
-{#                        </label>#}
-{#                    </div>#}
 
                     {{ form|bootstrap }}
                     {% if redirect_field_value %}
@@ -45,11 +57,19 @@
 
                 <div class="form-signin">
                     {% for provider in socialaccount_providers %}
-                        <button class="btn btn-lg btn-warning btn-block"
+                        <button class="btn btn-lg btn-default btn-block"
                                 onclick="location.href='{% provider_login_url provider.id process=" login " %}'">
-                            Log in with {{ provider.name }}
+
+                            {% if provider.name == "GitHub" %}
+                                <i class="fa fa-github" aria-hidden="true"></i> Log in with {{ provider.name }}
+                            {% elif provider.name == "Facebook" %}
+                                <i class="fa fa-facebook" aria-hidden="true"></i> Log in with {{ provider.name }}
+                            {% elif provider.name == "Google" %}
+                                <i class="fa fa-google" aria-hidden="true"></i> Log in with {{ provider.name }}
+                            {% endif %}
                         </button>
                     {% endfor %}
+
 
                     <div class="login-or" align="center">{% trans 'or' %}</div>
                     <button class="btn btn-lg btn-success btn-block"
