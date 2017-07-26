@@ -6,3 +6,4 @@ env
 staticfiles/
 keeper/conf/local.py
 geckodriver.log
+db.sql

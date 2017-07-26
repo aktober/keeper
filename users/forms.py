@@ -4,7 +4,6 @@ from users.models import Profile
 
 
 class RegisterForm(forms.ModelForm):
-    # first_name = forms.CharField(widget=forms.TextInput(attrs={'placeHolder':'First Name'}))
     class Meta:
         model = Profile
         fields = ('first_name', 'last_name', 'bio',)
