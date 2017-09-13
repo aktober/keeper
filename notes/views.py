@@ -61,6 +61,7 @@ class EditNoteView(generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditNoteView, self).get_context_data(**kwargs)
+        print("Crowdbotics")
         if self.get_object().user != self.request.user:
             raise Http404
         return context
